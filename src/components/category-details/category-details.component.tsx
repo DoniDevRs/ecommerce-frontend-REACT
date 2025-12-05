@@ -1,0 +1,79 @@
+import { FunctionComponent, useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { BiChevronLeft } from "react-icons/bi";
+
+// Utilities
+import Category from "../../types/category.type";
+import { db } from "../../config/firebase.config";
+import { categoryConverter } from "../../converters/firestore.converter";
+
+// Components
+import LoadingComponent from "../loading/loading.component";
+
+//Styles
+import { Container, CategoryTitle, IconContainer } from "./category-details.styles";
+import { ProductContainer } from "../product-item/product-item.styles";
+import ProductItem from "../product-item/product-item.component";
+import { useNavigate } from "react-router-dom";
+
+interface CategoryDetailsProps {
+    categoryId: string
+}       
+
+const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }) => {
+    const [category, setCategory] = useState<Category | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+        navigate('/');
+    }
+
+    useEffect(() => { 
+        const fetchCategory = async () => {
+          try {
+            setIsLoading(true);
+            const querySnapshot = await getDocs(
+              query(
+                collection(db, "categories").withConverter(categoryConverter),
+                where("id", "==", categoryId)
+              )
+            );
+
+            const category = querySnapshot.docs[0]?.data();
+
+            setCategory(category);
+
+
+          } catch (error) {
+            console.error("Error fetching category details:", error);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+
+        fetchCategory();
+    }, []);
+
+    if (isLoading) return <LoadingComponent />
+    
+    return (
+        <Container>
+            <IconContainer onClick={handleBackClick}>
+                <BiChevronLeft size={36} />
+            </IconContainer>
+            <CategoryTitle>
+                <p>Explorar {category?.name}</p>
+            </CategoryTitle>
+
+            <ProductContainer>
+                {category?.products.map((product) => (
+                    <ProductItem key={product.id} product={product} />
+                ))}
+            </ProductContainer>
+        </Container>
+    ) 
+}
+
+export default CategoryDetails;
