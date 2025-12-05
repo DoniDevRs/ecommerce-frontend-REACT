@@ -17,20 +17,31 @@ import {
   CartTotal
 } from './cart.styles'
 import { useNavigate } from 'react-router-dom'
+import useAppSelector from '../hooks/redux.hooks'
+import { useDispatch } from 'react-redux'
+import { toggleCart } from '../../store/reducers/cart/cart.actions'
 
 const Cart: FunctionComponent = () => {
-  const { isVisible, products, productsTotalPrice, productsCount,toggleCart } = useContext(CartContext)
+  const { isVisible, products } = useAppSelector((rootReducer) => rootReducer.cartReducer);
+  //const { isVisible, products, productsTotalPrice, productsCount,toggleCart } = useContext(CartContext)
+  const { productsTotalPrice, productsCount} = useContext(CartContext)
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const handleCheckoutClick = () => {
     navigate("/checkout");
-    toggleCart();
+    dispatch(toggleCart());
+  }
+
+  const handleEscapeAreaClick = () => {
+    dispatch(toggleCart());
   }
 
   return (
     <CartContainer isVisible={isVisible}>
-      <CartEscapeArea onClick={toggleCart} />
+      <CartEscapeArea onClick={handleEscapeAreaClick} />
       <CartContent>
         <CartTitle>Seu Carrinho</CartTitle>
 

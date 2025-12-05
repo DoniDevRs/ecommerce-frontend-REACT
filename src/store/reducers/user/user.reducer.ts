@@ -1,6 +1,6 @@
-import User from '../../types/user.type'
-import UserActionTypes from '../reducers/user.action-types'
-import { UserActions } from '../reducers/user.actions'
+import User from '../../../types/user.type'
+import UserActionTypes from './user.action-types'
+import { UserActions } from './user.actions'
 
 interface InitialState {
   currentUser: User | null

@@ -13,18 +13,23 @@ import {
 
 // Utilities
 import Product from '../../types/product.types'
-import { CartContext } from '../../contexts/cart.context'
+
+import { useDispatch } from 'react-redux'
+import { addProductToCart } from '../../store/reducers/cart/cart.actions'
 
 interface ProductItemProps {
   product: Product
 }
 
 const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
-  const { addProductToCart, toggleCart } = useContext(CartContext)
+  //const { addProductToCart, toggleCart } = useContext(CartContext)
+
+  const dispatch = useDispatch();
 
   const handleAddToCartClick = () => {
-    addProductToCart(product)
-    toggleCart()
+    //addProductToCart(product)
+    //toggleCart()
+    dispatch(addProductToCart(product));
   }
 
   return (

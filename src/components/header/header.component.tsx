@@ -10,6 +10,8 @@ import { auth } from '../../config/firebase.config';
 // Styles
 import { HeaderContainer, HeaderItems, HeaderItem, HeaderTitle } from './header.styles';
 import { CartContext } from '../../contexts/cart.context';
+import { logoutUser } from '../../store/reducers/user/user.actions';
+import { toggleCart } from '../../store/reducers/cart/cart.actions';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +21,8 @@ const Header = () => {
   //const { isAuthenticated } = useContext(UserContext);
   //const { isAuthenticated } = useSelector((rootReducer: any) => rootReducer.userReducer);
   const { isAuthenticated } = useSelector((rootReducer: any) => rootReducer.userReducer);
-  const { productsCount, toggleCart } = useContext(CartContext);
+  //const { productsCount, toggleCart } = useContext(CartContext);
+  const { productsCount } = useContext(CartContext);
 
   const handleLogoClick = () => {
     navigate("/");
@@ -38,8 +41,13 @@ const Header = () => {
   }
 
   const handleSignOutClick = () => {
+    //dispatch(logoutUser());
     dispatch({ type: 'LOGOUT_USER' });
     signOut(auth);
+  }
+
+  const handleCartClick = () => {
+    dispatch(toggleCart());
   }
 
   return (
@@ -60,7 +68,7 @@ const Header = () => {
             <HeaderItem onClick={handleSignOutClick}>Sair</HeaderItem>
           )
             }
-          <HeaderItem onClick={toggleCart}>
+          <HeaderItem onClick={handleCartClick}>
             <BsCart3 size={25} />
             <p style={ { marginLeft: 5 } }> {productsCount}</p>
           </HeaderItem>

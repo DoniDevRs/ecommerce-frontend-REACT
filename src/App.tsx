@@ -22,6 +22,9 @@ import Cart from "./components/cart/cart.component";
 import AuthenticationGuard from "./components/guards/authentication.guard";
 import CheckoutPage from "./components/pages/checkout/checkout.page";
 import PaymentConfirmationPage from "./components/pages/payment-confirmation/payment-confirmation-page";
+import UserActionTypes from "./store/reducers/user/user.action-types";
+import { loginUser, logoutUser } from "./store/reducers/user/user.actions";
+import useAppSelector from "./components/hooks/redux.hooks";
 
 const App: FunctionComponent = () => {
 
@@ -29,7 +32,7 @@ const App: FunctionComponent = () => {
 
   const dispatch = useDispatch();
 
-  const { isAuthenticated } = useSelector((rootReducer: any) => rootReducer.userReducer);
+  const { isAuthenticated } = useAppSelector((rootReducer) => rootReducer.userReducer);
 
   //const { isAuthenticated, loginUser, logoutUser } = useContext(UserContext);
 
@@ -39,6 +42,7 @@ const App: FunctionComponent = () => {
     if (isSigninOut) {
       //logoutUser();
 
+      //dispatch(logoutUser());
       dispatch({ type: 'LOGOUT_USER' });
 
       return setIsInitializing(false);
@@ -56,7 +60,8 @@ const App: FunctionComponent = () => {
       const userFromFirestore = querySnapshot.docs[0]?.data();
 
       //loginUser(userFromFirestore);
-      dispatch({ type: 'LOGIN_USER', payload: userFromFirestore });
+      //dispatch(loginUser(userFromFirestore));
+      dispatch({ type: "LOGIN_USER", payload: userFromFirestore });
 
       return setIsInitializing(false);
     }
