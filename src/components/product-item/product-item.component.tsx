@@ -15,7 +15,7 @@ import {
 import Product from '../../types/product.types'
 
 import { useDispatch } from 'react-redux'
-import { addProductToCart } from '../../store/reducers/cart/cart.actions'
+import { addProductToCart, toggleCart } from '../../store/reducers/cart/cart.actions'
 
 interface ProductItemProps {
   product: Product
@@ -28,8 +28,8 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
 
   const handleAddToCartClick = () => {
     //addProductToCart(product)
-    //toggleCart()
     dispatch(addProductToCart(product));
+    dispatch(toggleCart());
   }
 
   return (
