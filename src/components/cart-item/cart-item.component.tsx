@@ -13,7 +13,9 @@ import {
   CartItemQuantity,
   RemoveButton
 } from './cart-item.styles'
-import { decreaseCartProductQuantity, increaseCartProductQuantity, removeProductFromCart } from '../../store/reducers/cart/cart.actions'
+import { decreaseCartProductQuantity, 
+        increaseCartProductQuantity, 
+        removeProductFromCart } from '../../store/toolkit/cart/cart.slice'
 
 interface CartItemProps {
   product: CartProduct

@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai";
-import { clearCartProducts } from "../../../store/reducers/cart/cart.actions";
+import { clearCartProducts } from "../../../store/toolkit/cart/cart.slice";
 
 //components
 import Header from "../../header/header.component";

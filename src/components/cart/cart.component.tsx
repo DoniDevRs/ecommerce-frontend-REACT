@@ -19,7 +19,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import useAppSelector from '../hooks/redux.hooks'
 import { useDispatch } from 'react-redux'
-import { toggleCart } from '../../store/reducers/cart/cart.actions'
+import { toggleCart } from '../../store/toolkit/cart/cart.slice'
 
 const Cart: FunctionComponent = () => {
   const { isVisible, products } = useAppSelector((rootReducer) => rootReducer.cartReducer);

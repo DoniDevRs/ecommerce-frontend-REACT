@@ -15,7 +15,7 @@ import {
 import Product from '../../types/product.types'
 
 import { useDispatch } from 'react-redux'
-import { addProductToCart, toggleCart } from '../../store/reducers/cart/cart.actions'
+import { addProductToCart, toggleCart } from '../../store/toolkit/cart/cart.slice'
 
 interface ProductItemProps {
   product: Product

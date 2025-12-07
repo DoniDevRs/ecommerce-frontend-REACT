@@ -10,7 +10,7 @@ import useAppSelector from '../hooks/redux.hooks';
 
 // Styles
 import { HeaderContainer, HeaderItems, HeaderItem, HeaderTitle } from './header.styles';
-import { toggleCart } from '../../store/reducers/cart/cart.actions';
+import { toggleCart } from '../../store/toolkit/cart/cart.slice';
 import { logoutUser } from '../../store/toolkit/user/user.slice';
 
 const Header = () => {
