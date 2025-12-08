@@ -5,22 +5,32 @@ interface ProductImageProps {
 }
 
 export const ProductContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 10px;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
 `
 
 export const ProductInfo = styled.div`
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     margin-top: 5px;
+    padding: 0 5px;
 
     p {
         font-size: 1rem;
         font-weight: 500;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 

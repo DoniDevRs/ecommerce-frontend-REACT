@@ -12,7 +12,7 @@ import LoadingComponent from "../loading/loading.component";
 
 //Styles
 import { Container, CategoryTitle, IconContainer } from "./category-details.styles";
-import { ProductContainer } from "../product-item/product-item.styles";
+import { ProductsContainer } from "./category-details.styles";
 import ProductItem from "../product-item/product-item.component";
 import { useNavigate } from "react-router-dom";
 
@@ -67,11 +67,11 @@ const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }
                 <p>Explorar {category?.name}</p>
             </CategoryTitle>
 
-            <ProductContainer>
-                {category?.products.map((product) => (
-                    <ProductItem key={product.id} product={product} />
-                ))}
-            </ProductContainer>
+            <ProductsContainer>
+              {category?.products.map((product) => (
+                <ProductItem key={product.id} product={product} />
+              ))}
+            </ProductsContainer>
         </Container>
     ) 
 }
