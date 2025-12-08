@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { auth } from '../../config/firebase.config';
 import { toggleCart } from '../../store/toolkit/cart/cart.slice';
 import { logoutUser } from '../../store/toolkit/user/user.slice';
-import { selectProductsCount } from '../../store/reducers/cart/cart.selector';
+import { selectProductsCount } from '../../store/toolkit/cart/cart.selectors';
 import useAppSelector from '../hooks/redux.hooks';
 
 // Styles
