@@ -60,18 +60,18 @@ const CategoryDetails: FunctionComponent<CategoryDetailsProps> = ({ categoryId }
     
     return (
         <Container>
+          <CategoryTitle>
             <IconContainer onClick={handleBackClick}>
-                <BiChevronLeft size={36} />
+              <BiChevronLeft size={36} />
             </IconContainer>
-            <CategoryTitle>
-                <p>Explorar {category?.name}</p>
-            </CategoryTitle>
+                <p>Explorar {category?.displayName}</p>
+          </CategoryTitle>
 
-            <ProductsContainer>
-              {category?.products.map((product) => (
-                <ProductItem key={product.id} product={product} />
-              ))}
-            </ProductsContainer>
+          <ProductsContainer>
+            {category?.products.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
+          </ProductsContainer>
         </Container>
     ) 
 }

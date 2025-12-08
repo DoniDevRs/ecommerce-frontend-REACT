@@ -8,10 +8,12 @@ export const CategoryTitle = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20px;
+  gap: 10px;
 
   p {
-    font-size: 21px;
+    font-size: 2rem;
     font-weight: 500;
+    margin: 0;
   }
 `
 
