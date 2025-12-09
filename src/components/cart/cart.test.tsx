@@ -1,4 +1,4 @@
-
+import userEvent from '@testing-library/user-event'
 import { renderWithRedux } from '../helpers/test.helpers'
 import { screen } from '@testing-library/react'
 import Cart from './cart.component'
@@ -39,5 +39,30 @@ describe('Cart', () => {
 
     screen.getByText(/your cart is empty/i)
     expect(screen.queryByText(/proceed to checkout/i)).toBeNull()
+  })
+
+  it('should increase product quantity on increase click', () => {
+    renderWithRedux(<Cart />, {
+      preloadedState: {
+        cartReducer: {
+          products: [
+            {
+              id: '1',
+              imageUrl: 'image_url',
+              name: 'Hat',
+              price: 100,
+              quantity: 2
+            }
+          ]
+        }
+      } as any
+    })
+
+    const increaseButton = screen.getByLabelText(/increase quantity of hat/i)
+
+    userEvent.click(increaseButton)
+
+    screen.getByText('3')
+    screen.getByText('Total: R$300')
   })
 })
