@@ -90,4 +90,32 @@ describe('Cart', () => {
     screen.getByText('1')
     screen.getByText('Total: R$100')
   })
+
+  it('should remove product on remove click', () => {
+    renderWithRedux(
+      <Cart />,
+      {
+        preloadedState: {
+          cartReducer: {
+            products: [
+              {
+                id: '1',
+                imageUrl: 'image_url',
+                name: 'Hat',
+                price: 100,
+                quantity: 2
+              }
+            ]
+          }
+        } as any
+      }
+    )
+
+    const removeButton = screen.getByLabelText(/remove hat/i)
+
+    userEvent.click(removeButton)
+
+    expect(screen.queryByText(/hat/i)).toBeNull()
+    screen.getByText(/your cart is empty/i)
+  })
 })
