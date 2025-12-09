@@ -20,4 +20,33 @@ describe('Header', () => {
     screen.getByText(/login/i)
     screen.getByText(/create account/i)
   })
+
+  it('should show correct cart products count', () => {
+    const products: CartProduct[] = [
+      {
+        id: '1',
+        imageUrl: 'image_url',
+        name: 'Hat',
+        price: 100,
+        quantity: 10
+      },
+      {
+        id: '2',
+        imageUrl: 'image_url',
+        name: 'Jacket',
+        price: 100,
+        quantity: 12
+      }
+    ]
+
+    renderWithRedux(<Header />, {
+      preloadedState: {
+        cartReducer: {
+          products
+        }
+      } as any
+    })
+
+    screen.getByText('22')
+  })
 })
