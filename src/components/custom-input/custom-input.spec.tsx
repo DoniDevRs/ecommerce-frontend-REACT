@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Colors from '../../theme/theme.colors'
 import CustomInput from './custom-input.component'
 
@@ -15,5 +16,14 @@ describe('Custom Input', () => {
     const input = screen.getByPlaceholderText('lorem ipsum')
 
     expect(input).toHaveStyle({ border: 'none' })
+  })
+
+  it('should change value when user types', () => {
+    render(<CustomInput placeholder="lorem ipsum" hasError={false} />)
+    const input = screen.getByPlaceholderText('lorem ipsum')
+
+    userEvent.type(input, 'Dolor Sit')
+
+    screen.getByDisplayValue('Dolor Sit')
   })
 })
