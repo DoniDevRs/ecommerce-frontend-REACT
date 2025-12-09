@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event'
+
 import { renderWithRedux } from '../../helpers/test.helpers'
 import SignUpPage from './sign-up.page'
 import { screen } from '@testing-library/react'
@@ -53,5 +54,21 @@ describe('Sign Up', () => {
     userEvent.click(submitButton)
 
     await screen.findByText(/passwords do not match/i)
+  })
+
+  it('should show error when password has less than 6 characters', async () => {
+    renderWithRedux(
+      <SignUpPage />,
+      {}
+    )
+
+    const passwordInput = screen.getByPlaceholderText(/enter your password/i)
+
+    userEvent.type(passwordInput, '123')
+
+    const submitButton = screen.getByText('Create Account', { selector: 'button' })
+    userEvent.click(submitButton)
+
+    await screen.findByText(/password must be at least 6 characters/i)
   })
 })
