@@ -164,7 +164,7 @@ const SignUpPage = () => {
               <CustomInput
                 hasError={!!errors?.passwordConfirmation}
                 type="password"
-                placeholder="Enter your password again"
+                placeholder="Confirm your password"
                 {...register("passwordConfirmation", { required: true, minLength: 6, validate: (value) => {
                     return value === watchPassword;
                 } })}

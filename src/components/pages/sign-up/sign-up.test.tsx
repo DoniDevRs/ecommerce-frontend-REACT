@@ -1,7 +1,4 @@
 import userEvent from '@testing-library/user-event'
-//import * as firebaseAuth from 'firebase/auth'
-//import { AuthErrorCodes } from 'firebase/auth'
-
 import { renderWithRedux } from '../../helpers/test.helpers'
 import SignUpPage from './sign-up.page'
 import { screen } from '@testing-library/react'
@@ -37,5 +34,24 @@ describe('Sign Up', () => {
     userEvent.click(submitButton)
 
     await screen.findByText(/invalid email/i)
+  })
+
+  it('should show error when password and password confirmation are different', async () => {
+    renderWithRedux(
+      <SignUpPage />,
+      {}
+    )
+
+    const passwordInput = screen.getByPlaceholderText(/enter your password/i)
+    const passwordConfirmationInput = screen.getByPlaceholderText(/confirm your password/i)
+
+    userEvent.type(passwordInput, '123456')
+    userEvent.type(passwordConfirmationInput, '12345678')
+
+    const submitButton = screen.getByText('Create Account', { selector: 'button' })
+
+    userEvent.click(submitButton)
+
+    await screen.findByText(/passwords do not match/i)
   })
 })
